@@ -90,7 +90,7 @@ const handleSubmit = async () => {
 
     email.value = '';
     password.value = '';
-    const userIri = response.header.get('Location);
+    const userIri = response.header.get('Location');
     emit('user-authenticated', userIri);
 }
 
