@@ -15,7 +15,11 @@
     </head>
     <body>
     <script>
-        window.user = {{ app.user|serialize('jsonld')|raw }};
+        window.user = {{ app.user|serialize('jsonld',
+            {
+                'group': ['user:read'],
+            }
+        )|raw }};
     </script>
         {% block body %}{% endblock %}
     </body>
