@@ -30,7 +30,7 @@ import LoginForm from '../LoginForm';
 import coinLogoPath from '../../images/coinLogo.png';
 import goldPilePath from '../../images/GoldPile.png';
 
-defineProps(['entrypoint']);
+defineProps(['entrypoint', 'user']);
 const user = ref(window.user);
 
 const onUserAuthenticated = async (userUri) => {
