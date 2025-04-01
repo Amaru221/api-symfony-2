@@ -24,7 +24,7 @@ class ApiToken
     private ?\DateTimeImmutable $expiresAt = null;
 
     #[ORM\Column(length: 68)]
-    private ?string $token = null;
+    private ?string $token;
 
     #[ORM\Column]
     private array $scopes = [];
