@@ -8,6 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ApiTokenRepository::class)]
 class ApiToken
 {
+
+    private const PERSONAL_ACCESS_TOKEN_PREFIX = 'tcp_';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -25,6 +28,13 @@ class ApiToken
 
     #[ORM\Column]
     private array $scopes = [];
+
+
+    public function __construct(string $tokenType = self::PERSONAL_ACCESS_TOKEN_PREFIX)
+    {
+        $this->token = $tokenType.bin2hex(random_bytes(32));
+    }
+
 
     public function getId(): ?int
     {
