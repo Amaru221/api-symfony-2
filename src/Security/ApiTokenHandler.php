@@ -2,6 +2,7 @@
 
 use App\Repository\ApiTokenRepository;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Http\AccessToken\AccessTokenHandlerInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 
@@ -16,8 +17,12 @@ class ApiTokenHandler extends AccessTokenHandlerInterface
         //TODO
         $token = $this->apiTokenRepository->findOneBy(['token' => $accessToken]);
 
-        if(!$token or !$token->isValid()){
+        if(!$token){
             throw new BadCredentialsException();
+        }
+
+        if(!$token->isValid()){
+            throw new CustomUserMessageAuthenticationException("Token expired");
         }
 
         return new UserBadge($token->getOwnedBy()->getUserIdentifier());
