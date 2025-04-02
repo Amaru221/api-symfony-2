@@ -16,7 +16,7 @@ class ApiTokenHandler extends AccessTokenHandlerInterface
         //TODO
         $token = $this->apiTokenRepository->findOneBy(['token' => $accessToken]);
 
-        if(!$token){
+        if(!$token or !$token->isValid()){
             throw new BadCredentialsException();
         }
 
