@@ -73,7 +73,7 @@ Then, to start the web server, open a terminal, move into the
 project, and run:
 
 ```
-symfony serve
+symfony serve -d
 ```
 
 (If this is your first time using this command, you may see an
