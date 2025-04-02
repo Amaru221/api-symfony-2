@@ -1,4 +1,4 @@
-# API Platform 3 Security Tutorial! 🐉
+# API Platform 3 Security! 🐉
 
 ## Setup
 
