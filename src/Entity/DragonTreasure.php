@@ -37,6 +37,7 @@ use function Symfony\Component\String\u;
         new Post(security: 'is_granted("ROLE_TREASURE_CREATE")'),
         new Put(security: 'is_granted("ROLE_TREASURE_EDIT")'),
         new Patch(security: 'is_granted("ROLE_TREASURE_EDIT")'),
+        new Delete(security: 'is_granted("ROLE_ADMIN")')
     ],
     formats: [
         'jsonld',
