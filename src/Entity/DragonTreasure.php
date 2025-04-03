@@ -35,8 +35,8 @@ use function Symfony\Component\String\u;
         ),
         new GetCollection(),
         new Post(security: 'is_granted("ROLE_TREASURE_CREATE")'),
-        new Put(),
-        new Patch(),
+        new Put(security: 'is_granted("ROLE_TREASURE_EDIT")'),
+        new Patch(security: 'is_granted("ROLE_TREASURE_EDIT")'),
     ],
     formats: [
         'jsonld',
