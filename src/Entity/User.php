@@ -30,9 +30,12 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
     operations: [
         new Get(),
         new GetCollection(),
-        new Post('is_granted("PUBLIC_ACCESS")'),
-        new Put('is_granted("ROLE_USER_EDIT")'),
-        new Patch(),
+        new Post(
+            security: 'is_granted("PUBLIC_ACCESS")'),
+        new Put(
+            security: 'is_granted("ROLE_USER_EDIT")'),
+        new Patch(
+            security: 'is_granted("ROLE_USER_EDIT")'),
         new Delete(),
     ],
 )]
