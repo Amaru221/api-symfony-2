@@ -30,12 +30,11 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
     operations: [
         new Get(),
         new GetCollection(),
-        new Post(),
-        new Put(),
+        new Post('is_granted("PUBLIC_ACCESS")'),
+        new Put('is_granted("ROLE_USER_EDIT")'),
         new Patch(),
         new Delete(),
     ],
-
 )]
 #[ApiResource(
     uriTemplate: '/treasures/{treasure_id}/owner.{_format}',
