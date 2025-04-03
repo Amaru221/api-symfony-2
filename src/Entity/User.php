@@ -38,6 +38,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[UniqueEntity(fields: ['username'], message: 'It looks like another dragon took your username. ROAR!')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+
+    /* Scopes given during API authentication */
+    private ?array $accessTokenScopes = null;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
