@@ -13,7 +13,10 @@ class DragonTreasureResourceTest extends KernelTestCase {
     public function testGetCollectionOfTreasures(): void {
         $this->browser()
         ->get('/api/treasures')
-        ->dump();
+        ->dump()
+        ->assertJson()
+        ->assertJsonMatches('"hydra:totalItems"', 0)
+        ;
     }
 
 
