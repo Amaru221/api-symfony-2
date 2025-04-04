@@ -57,6 +57,8 @@ First, make sure you have `npm` installed (`npm` comes with Node) and then run:
 ```
 npm install
 npm run watch
+#Run npm watch in background - new cmd windows -
+start /B npm run watch
 ```
 
 ### Start the Symfony web server
