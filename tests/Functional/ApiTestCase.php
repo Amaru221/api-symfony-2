@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Tests\Functional;
+
 use Zenstruck\Browser\HttpOptions;
 use Zenstruck\Browser\Test\HasBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
