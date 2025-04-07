@@ -50,6 +50,7 @@ class DragonTreasureResourceTest extends KernelTestCase {
         ->post('/api/treasures', [
             'json' => [],
         ])
+        ->assertStatus(422)
         ->dump()
         ;
     }
