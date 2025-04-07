@@ -55,6 +55,7 @@ class DragonTreasureResourceTest extends KernelTestCase {
             ],
         ])
         ->assertStatus(201)
+        ->assertJsonMatches('name', 'Test Dragon Treasure')
         ->dump()
         ;
     }
