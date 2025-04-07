@@ -1,8 +1,9 @@
 <?php
 
 use Zenstruck\Browser\Json;
-use App\Factory\DragonTreasureFactory;
 use App\Factory\UserFactory;
+use Zenstruck\Browser\HttpOptions;
+use App\Factory\DragonTreasureFactory;
 use Zenstruck\Browser\Test\HasBrowser;
 use Zenstruck\Foundry\Test\ResetDatabase;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -45,15 +46,13 @@ class DragonTreasureResourceTest extends KernelTestCase {
             'json' => [],
         ])
         ->assertStatus(422)
-        ->post('/api/treasures', [
-            'json' => [
+        ->post('/api/treasures', HttpOptions::json([
                 'name' => 'Test Dragon Treasure',
                 'description' => 'A test dragon treasure.',
                 'value' => 1000,
                 'coolFactor' => 5,
                 'owner' => '/api/users/'.$user->getId(),
-            ],
-        ])
+        ])->withHeader('Accept', 'application/ld+json'))
         ->assertStatus(201)
         ->assertJsonMatches('name', 'Test Dragon Treasure')
         ->dump()
