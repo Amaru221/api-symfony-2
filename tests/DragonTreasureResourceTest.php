@@ -56,7 +56,6 @@ class DragonTreasureResourceTest extends ApiTestCase {
         ])
         ->assertStatus(201)
         ->assertJsonMatches('name', 'Test Dragon Treasure')
-        ->dump()
         ;
     }
 
