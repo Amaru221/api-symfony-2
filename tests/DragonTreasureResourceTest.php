@@ -1,9 +1,10 @@
 <?php
 
+use Zenstruck\Browser\Json;
 use App\Factory\DragonTreasureFactory;
 use Zenstruck\Browser\Test\HasBrowser;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\ResetDatabase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class DragonTreasureResourceTest extends KernelTestCase {
 
@@ -13,11 +14,26 @@ class DragonTreasureResourceTest extends KernelTestCase {
 
     public function testGetCollectionOfTreasures(): void {
         DragonTreasureFactory::createMany(5);
+
         $this->browser()
         ->get('/api/treasures')
-        ->dump()
         ->assertJson()
         ->assertJsonMatches('"hydra:totalItems"', 5)
+        ->assertJsonMatches('length("hydra:member")', 5)
+        ->use(function (Json $json){
+            $json->search('keys("hydra:member"[0])',[
+                '@id',
+                '@type',
+                'name',
+                'description',
+                'owner',
+                'value',
+                'coolFactor',
+                'owner',
+                'shortDescription',
+                'plunderedAtAgo',
+            ]);
+        })
         ;
     }
 
