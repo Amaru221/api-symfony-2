@@ -2,6 +2,7 @@
 
 use Zenstruck\Browser\Json;
 use App\Factory\DragonTreasureFactory;
+use App\Factory\UserFactory;
 use Zenstruck\Browser\Test\HasBrowser;
 use Zenstruck\Foundry\Test\ResetDatabase;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -36,11 +37,16 @@ class DragonTreasureResourceTest extends KernelTestCase {
     }
 
     public function testPostToCreateTreasure(): void {
+        $user = UserFactory::createOne(['password' => 'pass']);
+
         $this->browser()
         ->post('/api/treasures', [
-            'json' => [],
+            'json' => [
+                'email' => $user->getEmail(),
+                'password' => 'pass',
+            ],
         ])
-        ->assertStatus(422)
+        ->assertStatus(204)
         ->dump()
         ;
     }
