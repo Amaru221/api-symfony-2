@@ -34,6 +34,9 @@ class DragonTreasureVoter extends Voter
             case self::EDIT:
                 // logic to determine if the user can EDIT
                 // return true or false
+                if($subject->getOwner() == $user){
+                    return true;
+                }
                 break;
         }
 
