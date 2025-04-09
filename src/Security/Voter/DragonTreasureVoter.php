@@ -9,13 +9,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class DragonTreasureVoter extends Voter
 {
     public const EDIT = 'POST_EDIT';
-    public const VIEW = 'POST_VIEW';
 
     protected function supports(string $attribute, mixed $subject): bool
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, [self::EDIT, self::VIEW])
+        return in_array($attribute, [self::EDIT])
             && $subject instanceof \App\Entity\DragonTreasure;
     }
 
@@ -31,10 +30,6 @@ class DragonTreasureVoter extends Voter
         switch ($attribute) {
             case self::EDIT:
                 // logic to determine if the user can EDIT
-                // return true or false
-                break;
-            case self::VIEW:
-                // logic to determine if the user can VIEW
                 // return true or false
                 break;
         }
