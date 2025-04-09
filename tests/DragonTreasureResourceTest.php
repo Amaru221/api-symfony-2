@@ -119,7 +119,7 @@ class DragonTreasureResourceTest extends ApiTestCase {
     }
 
     public function testAdminCanPatchToEditTreasure(): void {
-        $admin = UserFactory::createOne(['roles' => ['ROLE_ADMIN']]);
+        $admin = UserFactory::new()->withRoles(['ROLE_ADMIN'])->create();
     }
 
 
