@@ -6,6 +6,7 @@ use ApiPlatform\OpenApi\Model\SecurityScheme;
 use ApiPlatform\OpenApi\OpenApi;
 use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
 
+/** decorador para ApiFactory */
 #[AsDecorator('api_platform.openapi.factory')]
 class OpenApiFactoryDecorator implements OpenApiFactoryInterface {
 
@@ -13,6 +14,7 @@ class OpenApiFactoryDecorator implements OpenApiFactoryInterface {
 
     }
 
+    /** añadimos al esquema access_token que sea tipo http y incluya bearer antes del token */
     public function __invoke(array $context = []): OpenApi
     {
         $openApi = $this->decorated->__invoke($context);
