@@ -3,13 +3,19 @@
 namespace App\Security\Voter;
 
 use App\Entity\DragonTreasure;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class DragonTreasureVoter extends Voter
 {
     public const EDIT = 'POST_EDIT';
+
+    public function __construct(private Security $security)
+    {
+        
+    }
 
     protected function supports(string $attribute, mixed $subject): bool
     {
@@ -34,6 +40,9 @@ class DragonTreasureVoter extends Voter
             case self::EDIT:
                 // logic to determine if the user can EDIT
                 // return true or false
+                if(!$this->security->isGranted('ROLE_TREASURE_EDIT')){
+                    return false;
+                }
                 if($subject->getOwner() == $user){
                     return true;
                 }
