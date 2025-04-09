@@ -7,6 +7,7 @@ use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationExc
 use Symfony\Component\Security\Http\AccessToken\AccessTokenHandlerInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 
+/** estac clase controla el funcionamiento de access_control*/
 class ApiTokenHandler implements AccessTokenHandlerInterface
 {
 
@@ -14,6 +15,7 @@ class ApiTokenHandler implements AccessTokenHandlerInterface
     
     }
     
+    /** devuelve el userBadge objeto con los datos del usuario autenticado, si no, lanza una excepcion  */
     public function getUserBadgeFrom(#[\SensitiveParameter] string $accessToken): UserBadge{
         //TODO
         $token = $this->apiTokenRepository->findOneBy(['token' => $accessToken]);
