@@ -117,7 +117,10 @@ class DragonTreasure
 
     #[ORM\Column]
     #[ApiFilter(BooleanFilter::class)]
-    #[ApiProperty(security: 'is_granted("EDIT", object)')]
+    #[ApiProperty(
+        security: 'is_granted("EDIT", object)',
+        securityPostDenormalize: 'is_granted("EDIT", object)',
+    )]
     private bool $isPublished = false;
 
     #[ORM\ManyToOne(inversedBy: 'dragonTreasures')]
