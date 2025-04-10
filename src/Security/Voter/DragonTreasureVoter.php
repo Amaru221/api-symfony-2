@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class DragonTreasureVoter extends Voter
 {
-    public const EDIT = 'POST_EDIT';
+    public const EDIT = 'EDIT';
 
     public function __construct(private Security $security)
     {
@@ -47,7 +47,7 @@ class DragonTreasureVoter extends Voter
                 if(!$this->security->isGranted('ROLE_TREASURE_EDIT')){
                     return false;
                 }
-                if($subject->getOwner() == $user){
+                if($subject->getOwner() === $user){
                     return true;
                 }
                 break;
