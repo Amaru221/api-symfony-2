@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Tests\Functional;
+
 use App\Entity\ApiToken;
 use App\Factory\ApiTokenFactory;
 use App\Factory\UserFactory;
