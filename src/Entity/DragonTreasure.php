@@ -117,9 +117,9 @@ class DragonTreasure
 
     #[ORM\Column]
     #[ApiFilter(BooleanFilter::class)]
+    #[Groups(['treasure:read', 'treasure:write'])]
     #[ApiProperty(
         security: 'is_granted("EDIT", object)',
-        securityPostDenormalize: 'is_granted("EDIT", object)',
     )]
     private bool $isPublished = false;
 
