@@ -81,6 +81,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['user:write'])]
     private ?string $password = null;
 
+
+    private ?string $plainPassword = null;
+
     #[ORM\Column(length: 255, unique: true)]
     #[Groups(['user:read', 'user:write', 'treasure:item:get', 'treasure:write'])]
     #[Assert\NotBlank]
@@ -258,6 +261,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function markAsTokenScopes(array $scopes) {
         $this->accessTokenScopes = $scopes;
+    }
+
+    public function setPlainPassword(string $plainPassword): User
+    {
+        $this->plainPassword = $plainPassword;
+        return $this;
+    }
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
     }
 
 }
