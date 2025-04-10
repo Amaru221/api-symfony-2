@@ -121,7 +121,7 @@ class DragonTreasureResourceTest extends ApiTestCase {
     public function testAdminCanPatchToEditTreasure(): void {
         $admin = UserFactory::new()->asAdmin()->create();
 
-        $treasure = DragonTreasureFactory::createOne();
+        $treasure = DragonTreasureFactory::createOne(['isPublished' => false]);
 
         $this->browser()
         ->actingAs($admin)
@@ -132,6 +132,7 @@ class DragonTreasureResourceTest extends ApiTestCase {
         ])
         ->assertStatus(200)
         ->assertJsonMatches('value', 12345)
+        ->assertJsonMatches('isPublished', false)
         ;
     }
 
