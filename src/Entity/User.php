@@ -31,7 +31,9 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
         new Get(),
         new GetCollection(),
         new Post(
-            security: 'is_granted("PUBLIC_ACCESS")'),
+            security: 'is_granted("PUBLIC_ACCESS")',
+            validationContext: ['groups' => ['Default', 'postValidation']],
+        ),
         new Put(
             security: 'is_granted("ROLE_USER_EDIT")'),
         new Patch(
