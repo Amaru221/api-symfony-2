@@ -81,6 +81,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[Groups(['user:write'])]
+    #[Assert\NotBlank]
     private ?string $plainPassword = null;
 
     #[ORM\Column(length: 255, unique: true)]
