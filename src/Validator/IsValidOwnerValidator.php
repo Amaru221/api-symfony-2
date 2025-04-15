@@ -9,11 +9,14 @@ class IsValidOwnerValidator extends ConstraintValidator
 {
     public function validate($value, Constraint $constraint)
     {
-        /* @var App\Validator\IsValidOwner $constraint */
+        assert($constraint instanceof IsValidOwner);
 
         if (null === $value || '' === $value) {
             return;
         }
+
+        assert($$value instanceof User);
+
 
         // TODO: implement the validation here
         $this->context->buildViolation($constraint->message)
