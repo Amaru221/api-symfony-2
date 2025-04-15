@@ -126,6 +126,7 @@ class DragonTreasure
     #[Assert\Valid]
     #[ApiFilter(SearchFilter::class, strategy: 'exact')]
     #[IsValidOwner]
+    #[Assert\NotNull()]
     private ?User $owner = null;
 
     public function __construct(string $name = null)
