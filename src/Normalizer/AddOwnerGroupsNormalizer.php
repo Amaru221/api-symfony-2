@@ -11,7 +11,7 @@ class AddOwnerGroupsNormalizer implements NormalizerInterface {
         //TODO
     }
 
-    public function supportsNormalization(mixed $data, ?string $format = null)
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         //TODO
     }
