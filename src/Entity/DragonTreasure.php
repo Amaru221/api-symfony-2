@@ -9,6 +9,7 @@ use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Post;
 use Doctrine\DBAL\Types\Types;
 use ApiPlatform\Metadata\Patch;
+use App\Validator\IsValidOwner;
 use ApiPlatform\Metadata\Delete;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiFilter;
@@ -40,7 +41,6 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
         new Put(security: 'is_granted("ROLE_TREASURE_EDIT")'),
         new Patch(
             security: 'is_granted("EDIT", object)',
-            securityPostDenormalize: 'is_granted("EDIT", object)'
         ),
         new Delete(security: 'is_granted("ROLE_ADMIN")'),
     ],
@@ -125,6 +125,7 @@ class DragonTreasure
     #[Groups(['treasure:read', 'treasure:write'])]
     #[Assert\Valid]
     #[ApiFilter(SearchFilter::class, strategy: 'exact')]
+    #[IsValidOwner]
     private ?User $owner = null;
 
     public function __construct(string $name = null)
