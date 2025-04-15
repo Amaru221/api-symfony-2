@@ -138,7 +138,7 @@ class DragonTreasureResourceTest extends ApiTestCase {
         ;
     }
 
-    public function testOwnerCanSeeIsPublishedField() : void {
+    public function testOwnerCanSeeIsPublishedAndMineField() : void {
         $user = UserFactory::new()->create();
         $treasure = DragonTreasureFactory::createOne([
             'isPublished' => false,
