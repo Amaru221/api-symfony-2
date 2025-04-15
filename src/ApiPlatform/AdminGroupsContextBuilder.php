@@ -2,13 +2,12 @@
 
 namespace App\ApiPlatform;
 
-use ApiPlatform\GraphQl\Serializer\SerializerContextBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use ApiPlatform\Serializer\SerializerContextBuilderInterface;
 use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
 
 #[AsDecorator('api_platform.serializer.context_builder')]
-class AdminGroupsContextBuilder extends SerializerContextBuilderInterface {
+class AdminGroupsContextBuilder implements SerializerContextBuilderInterface {
 
     public function __construct(private SerializerContextBuilderInterface $decorated)
     {
