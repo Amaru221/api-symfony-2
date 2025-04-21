@@ -2,6 +2,7 @@
 
 namespace App\Validator;
 
+use App\Entity\DragonTreasure;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Validator\Constraint;
@@ -26,6 +27,13 @@ class TreasuresAllowedOwnerChangeValidator extends ConstraintValidator
         assert($value instanceof Collection);
 
         $unitOfWork = $this->entityManager->getUnitOfWork();
+
+        foreach($value as $dragonTreasure) {
+            assert($dragonTreasure instanceof DragonTreasure);
+
+            $originalData = $unitOfWork->getOriginalEntityData($dragonTreasure);
+            dd($originalData, $dragonTreasure);
+        }
 
         // TODO: implement the validation here
         $this->context->buildViolation($constraint->message)
