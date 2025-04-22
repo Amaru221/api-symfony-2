@@ -55,7 +55,7 @@ class DragonTreasureResourceTest extends ApiTestCase {
                 'description' => 'A test dragon treasure.',
                 'value' => 1000,
                 'coolFactor' => 5,
-                'owner' => '/api/users/'.$user->getId(),
+                //'owner' => '/api/users/'.$user->getId(),
             ]
         ])
         ->assertStatus(201)
