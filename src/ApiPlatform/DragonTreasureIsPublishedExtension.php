@@ -15,8 +15,8 @@ class DragonTreasureIsPublishedExtension implements QueryCollectionExtensionInte
             return;
         }
 
+        $rootAlias = $queryBuilder->getRootAliases()[0];
 
-        
     }
 
 }
