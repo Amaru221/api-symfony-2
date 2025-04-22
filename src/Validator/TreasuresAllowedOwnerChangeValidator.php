@@ -4,14 +4,14 @@ namespace App\Validator;
 
 use App\Entity\DragonTreasure;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class TreasuresAllowedOwnerChangeValidator extends ConstraintValidator
 {
 
-    public function __construct(private EntityManager $entityManager)
+    public function __construct(private EntityManagerInterface $entityManager)
     {
 
     }
