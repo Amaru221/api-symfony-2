@@ -3,6 +3,7 @@
 namespace App\Tests\Functional;
 
 use App\Entity\ApiToken;
+use App\Entity\DragonTreasure;
 use App\Factory\ApiTokenFactory;
 use App\Factory\UserFactory;
 use Zenstruck\Browser\HttpOptions;
@@ -19,6 +20,10 @@ class DragonTreasureResourceTest extends ApiTestCase {
     public function testGetCollectionOfTreasures(): void {
         DragonTreasureFactory::createMany(5, [
             'isPublished' => true,
+        ]);
+
+        DragonTreasureFactory::createOne([
+            'isPublished' => false,
         ]);
 
         $json = $this->browser()
