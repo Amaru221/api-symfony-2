@@ -17,7 +17,9 @@ class DragonTreasureResourceTest extends ApiTestCase {
 
 
     public function testGetCollectionOfTreasures(): void {
-        DragonTreasureFactory::createMany(5);
+        DragonTreasureFactory::createMany(5, [
+            'isPublished' => true,
+        ]);
 
         $json = $this->browser()
         ->get('/api/treasures')
