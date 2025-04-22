@@ -17,6 +17,9 @@ class DragonTreasureIsPublishedExtension implements QueryCollectionExtensionInte
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
 
+        $queryBuilder->andWhere(sprintf('%s.isPublished = :isPublished', $rootAlias))
+        ->setParameter('isPublished', true);
+
     }
 
 }
