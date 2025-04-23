@@ -12,7 +12,7 @@ use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 class DragonTreasureIsPublishedExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface{
 
     public function __construct(private Security $security){
-        
+
     }
 
     public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, ?Operation $operation = null, array $context = []): void
@@ -41,8 +41,15 @@ class DragonTreasureIsPublishedExtension implements QueryCollectionExtensionInte
         }
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
-        $queryBuilder->andWhere(sprintf('%s.isPublished = :isPublished', $rootAlias))
-        ->setParameter('isPublished', true);
+        $user = $this->security->getUser();
+        if($user){
+            $queryBuilder->andWhere(sprintf('%s.isPublished = :isPublished or %s.owner = :owner', $rootAlias, $rootAlias))
+                ->setParameter('owner', $user);
+        }else{
+            $queryBuilder->andWhere(sprintf('%s.isPublished = :isPublished', $rootAlias));
+        }
+
+        $queryBuilder->setParameter('isPublished', true);
     }
 
 }
