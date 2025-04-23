@@ -140,6 +140,46 @@ class DragonTreasureResourceTest extends ApiTestCase {
         ;
     }
 
+    public function testPatchUnpublishedWorks(){
+        $user = UserFactory::createOne();
+        $treasure = DragonTreasureFactory::createOne([
+            'owner' => $user,
+            'isPublished' => false,
+        ]);
+        
+        $this->browser()
+        ->actingAs($user)
+        ->patch('/api/treasures/'.$treasure->getId(), [
+            'json' => [
+                'value' => 12345,
+            ]
+        ])
+        ->assertStatus(200)
+        ->assertJsonMatches('value', 12345)
+        ;
+
+        $user2 = UserFactory::createOne();
+        $this->browser()
+        ->actingAs($user2)
+        ->patch('/api/treasures/'.$treasure->getId(), [
+            'json' => [
+                'value' => 6789,
+            ]
+        ])
+        ->assertStatus(403)
+        ;
+
+        $this->browser()
+        ->actingAs($user)
+        ->patch('/api/treasures/'.$treasure->getId(), [
+            'json' => [
+                'owner' => '/api/users/'.$user2->getId(), 
+            ]
+        ])
+        ->assertStatus(422)
+        ;
+    }
+
     public function testAdminCanPatchToEditTreasure(): void {
         $admin = UserFactory::new()->asAdmin()->create();
 
