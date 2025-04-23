@@ -20,7 +20,7 @@ class TreasuresAllowedOwnerChangeValidator extends ConstraintValidator
     {
         assert($constraint instanceof TreasuresAllowedOwnerChange);
 
-        if (null === $value || '' === $value) {
+        if (null === $value || '' === $value || $value->isEmpty()) {
             return;
         }
 
