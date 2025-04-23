@@ -97,7 +97,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $username = null;
 
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: DragonTreasure::class, cascade: ['persist'], orphanRemoval: true)]
-    #[Groups(['user:read', 'user:write'])]
+    #[Groups(['user:write'])]
     #[Assert\Valid]
     #[TreasuresAllowedOwnerChange()]
     private Collection $dragonTreasures;
@@ -207,6 +207,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->dragonTreasures;
     }
 
+    #[Groups(['user:read'])]
+    #[SerializedName('dragonTreasures')]
     public function getPublishedDragonTreasures(): Collection
     {
         return $this->dragonTreasures->filter(static function(DragonTreasure $treasure){
