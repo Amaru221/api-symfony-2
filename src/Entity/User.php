@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use ApiPlatform\Serializer\Filter\PropertyFilter;
 use App\Validator\TreasuresAllowedOwnerChange;
+use Collator;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -204,6 +205,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getDragonTreasures(): Collection
     {
         return $this->dragonTreasures;
+    }
+
+    public function getPublishedDragonTreasures(): Collection
+    {
+        return $this->dragonTreasures->filter(static function(DragonTreasure $treasure){
+            return $treasure->getIsPublished();
+        });
     }
 
     public function addDragonTreasure(DragonTreasure $treasure): self
